@@ -1,4 +1,4 @@
-lines = File.readlines("input-part1").map(&:chomp)
+lines = File.readlines(ARGV[0]).map(&:chomp)
 
 keypad = [[1,2,3],
           [4,5,6],
