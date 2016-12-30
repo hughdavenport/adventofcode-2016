@@ -124,17 +124,15 @@ class Node
   end
 
   def <=>(a)
-    if a.moves == moves
-      if a.num_wrong == num_wrong
-        return a.lift <= lift
-      end
-      return a.num_wrong <=> num_wrong
-    end
-    a.moves <=> moves
+    a.distance <=> distance
   end
 
   def num_wrong
     floors[0..-2].each_with_index.map { |floor, index| (3 - index) * (floor[:generators].length + floor[:microchips].length) }.inject(&:+)
+  end
+
+  def distance
+    moves + num_wrong
   end
 
   def clone
