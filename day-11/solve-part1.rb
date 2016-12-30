@@ -33,17 +33,6 @@ class Node
         node.floors[lift][:generators].delete(generator)
         node.floors[node.lift][:generators] << generator
         new_set << node unless node.bad?
-        floor[:generators].each do |generator2|
-          next if generator == generator2
-          node = clone
-          node.moves += 1
-          node.lift -= 1
-          node.floors[lift][:generators].delete(generator)
-          node.floors[lift][:generators].delete(generator2)
-          node.floors[node.lift][:generators] << generator
-          node.floors[node.lift][:generators] << generator2
-          new_set << node unless node.bad?
-        end
       end
       floor[:microchips].each do |microchip|
         node = clone
@@ -52,29 +41,6 @@ class Node
         node.floors[lift][:microchips].delete(microchip)
         node.floors[node.lift][:microchips] << microchip
         new_set << node unless node.bad?
-        floor[:microchips].each do |microchip2|
-          next if microchip == microchip2
-          node = clone
-          node.moves += 1
-          node.lift -= 1
-          node.floors[lift][:microchips].delete(microchip)
-          node.floors[lift][:microchips].delete(microchip2)
-          node.floors[node.lift][:microchips] << microchip
-          node.floors[node.lift][:microchips] << microchip2
-          new_set << node unless node.bad?
-        end
-      end
-      floor[:generators].each do |generator|
-        floor[:microchips].each do |microchip|
-          node = clone
-          node.moves += 1
-          node.lift -= 1
-          node.floors[lift][:generators].delete(generator)
-          node.floors[node.lift][:generators] << generator
-          node.floors[lift][:microchips].delete(microchip)
-          node.floors[node.lift][:microchips] << microchip
-          new_set << node unless node.bad?
-        end
       end
     end
     if lift < 3
