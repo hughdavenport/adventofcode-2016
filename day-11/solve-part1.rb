@@ -130,6 +130,7 @@ class Node
   end
 
   def <=>(a)
+    return a.moves <= moves if a.distance == distance
     a.distance <=> distance
   end
 
