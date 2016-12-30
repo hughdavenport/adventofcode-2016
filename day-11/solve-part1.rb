@@ -128,7 +128,7 @@ class Node
   end
 
   def num_wrong
-    floors[0..-2].each_with_index.map { |floor, index| (3 - index) * (floor[:generators].length + floor[:microchips].length) }.inject(&:+) * 2
+    floors[0..-2].each_with_index.map { |floor, index| (3 - index) * (floor[:generators].length + floor[:microchips].length) }.inject(&:+) * 2 + (lift - 3)
   end
 
   def distance
