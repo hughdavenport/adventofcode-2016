@@ -108,7 +108,7 @@ class Node
 
   def ==(a)
     a.lift == lift &&
-      a.sorted_floors == sorted_floors
+      a.distances_to_pairs == distances_to_pairs
   end
 
   def eql?(a)
@@ -116,11 +116,17 @@ class Node
   end
 
   def hash
-    sorted_floors.hash
+    distances_to_pairs.hash
   end
 
-  def sorted_floors
-    floors.map { |floor| floor.map { |sym, arr| [sym, arr.sort] }.to_h }
+  def distances_to_pairs
+    floors.each_with_index.map do |floor, index|
+      floor[:microchips].map do |microchip|
+        floors.index do |floor|
+          floor[:generators].include?(microchip)
+        end - index
+      end
+    end
   end
 
   def <=>(a)
