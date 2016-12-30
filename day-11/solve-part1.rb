@@ -140,10 +140,6 @@ class Node
   end
 end
 
-def solve
-  puts floors
-end
-
 starting_node = Node.new(ARGV[0])
 
 queue = PQueue.new([starting_node])
